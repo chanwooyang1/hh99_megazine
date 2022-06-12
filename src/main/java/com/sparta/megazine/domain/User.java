@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Table(name = "Users")
+
 public class User extends TimeStamped implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
