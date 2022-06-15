@@ -1,18 +1,15 @@
 package com.sparta.megazine.service;
 
-
-import com.sparta.megazine.domain.Post;
-import com.sparta.megazine.repository.PostRepository;
+import com.sparta.megazine.dto.UserRequestDto;
 import com.sparta.megazine.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
-public class PostService {
-
-    private final PostRepository postRepository;
+@Service
+public class UserService {
     private final UserRepository userRepository;
+
 
 
 }
