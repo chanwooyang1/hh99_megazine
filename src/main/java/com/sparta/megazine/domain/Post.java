@@ -1,5 +1,6 @@
 package com.sparta.megazine.domain;
 
+import com.sparta.megazine.dto.PostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "Post")
+@Table(name = "posts")
 public class Post extends TimeStamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +42,10 @@ public class Post extends TimeStamped{
 
     @Column
     private Long view_count = 0L;
+
+
+    public Post(PostRequestDto postRequestDto){
+
+    }
+
 }

@@ -1,23 +1,23 @@
 package com.sparta.megazine.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
-@Table(name = "Users")
-
+@Builder
+@Table(name = "users")
 public class User extends TimeStamped implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class User extends TimeStamped implements UserDetails {
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Post> posts  = new HashSet<>();
+    Set<Post> posts = new HashSet<>();
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -54,7 +54,6 @@ public class User extends TimeStamped implements UserDetails {
 
     @Column(nullable = false)
     private String profile_image_url;
-
 
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -93,3 +92,5 @@ public class User extends TimeStamped implements UserDetails {
         return true;
     }
 }
+
+
