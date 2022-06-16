@@ -1,6 +1,7 @@
 package com.sparta.megazine.domain;
 
 
+import com.sparta.megazine.dto.UserRequestDto;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,6 +46,9 @@ public class User extends TimeStamped implements UserDetails {
     @Column(nullable = false)
     private String nickname;
 
+    @Column
+    private String profile_image_url;
+
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -52,8 +56,7 @@ public class User extends TimeStamped implements UserDetails {
     @Column(length = 300)
     private String introduce;
 
-    @Column(nullable = false)
-    private String profile_image_url;
+
 
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -91,6 +94,8 @@ public class User extends TimeStamped implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
 
 
