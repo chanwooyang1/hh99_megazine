@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 public class PostResponseDto{
-    private String nickname, template, imageUrl, content, title;
-    private Long postId, viewCount;
+    private String nickname, imageUrl, content, title;
+    private Long postId, viewCount, template;
     private LocalDateTime createdAt, modifiedAt;
 
 

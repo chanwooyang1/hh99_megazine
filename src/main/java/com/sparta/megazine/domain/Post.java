@@ -50,7 +50,7 @@ public class Post extends TimeStamped{
     private Long viewCount = 0L;
 
     @Column
-    private String templates = "Center";
+    private Long templates = 1L;
 
     @Builder
     public Post(User user, String title, String content, String imageUrl) {

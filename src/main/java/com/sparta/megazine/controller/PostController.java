@@ -30,19 +30,18 @@ public class PostController {
 
     @GetMapping("")
     public List<PostResponseDto> getPosts(){
-        List<Post> getPostList = postRepository.findAllByOrderByCreatedAtDesc();
-        List<PostResponseDto> list = new ArrayList<>();
-        return list;
-    }
-
-
-
-
-    @GetMapping("/{postId}")
-    public Post onePost(@PathVariable Long postID){
-        return postRepository.findById(postID).orElseThrow(() -> new IllegalArgumentException("게시글 아이디가 존재하지 않습니다."));
+        return postRepository.findAllByOrderByCreatedAtDesc();
 
     }
+
+
+
+
+//    @GetMapping("/{postId}")
+//    public Post onePost(@PathVariable Long postID){
+//        return postRepository.findById(postID).orElseThrow(() -> new IllegalArgumentException("게시글 아이디가 존재하지 않습니다."));
+//
+//    }
 
     @PostMapping("")
     public PostRequestDto.CreatePost createPost(@RequestBody PostRequestDto.CreatePost postRequestDto, @AuthenticationPrincipal User user){
