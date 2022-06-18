@@ -6,12 +6,12 @@ import com.sparta.megazine.dto.UserResponseDto;
 import com.sparta.megazine.repository.UserRepository;
 import com.sparta.megazine.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 import java.util.Collections;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -46,11 +46,15 @@ public class UserService {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
 
-
         return jwtTokenProvider.createToken(loginUser.getUsername(), loginUser.getRoles());
         }
 
-
+    public UserResponseDto userInfo(@AuthenticationPrincipal User user){
+        User oneUser = userRepository.findById(user.getId()).orElseThrow(
+                () -> new IllegalArgumentException("아이디가 존재하지 않습니다.")
+        );
+        return new UserResponseDto(oneUser);
+    }
 
 
     }

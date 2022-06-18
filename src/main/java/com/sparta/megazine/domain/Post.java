@@ -1,18 +1,24 @@
 package com.sparta.megazine.domain;
 
-import com.sparta.megazine.dto.PostRequestDto;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+
+import java.util.List;
+
 
 
 @Entity
 @Getter
 @NoArgsConstructor
 @Table(name = "posts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Post extends TimeStamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +31,11 @@ public class Post extends TimeStamped{
 
     @Column
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @Column
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Like> likes = new HashSet<>();
+    private List<Like> likes = new ArrayList<>();
 
     @Column(nullable = false)
     private String title;
@@ -37,15 +43,21 @@ public class Post extends TimeStamped{
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private String image_url;
+    @Column(nullable = false, name = "image_url")
+    private String imageUrl;
+
+    @Column( name = "view_count")
+    private Long viewCount = 0L;
 
     @Column
-    private Long view_count = 0L;
+    private String templates = "Center";
 
-
-    public Post(PostRequestDto postRequestDto){
+    @Builder
+    public Post(User user, String title, String content, String imageUrl) {
+        this.user = user;
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
 
     }
-
 }

@@ -1,11 +1,24 @@
 package com.sparta.megazine.dto;
+import lombok.*;
 
-import lombok.Getter;
+import java.time.LocalDateTime;
 
-@Getter
+
 public class PostRequestDto  {
-    String title;
-    String content;
-    String imange_url;
-    Long view_count;
+
+
+
+
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    public static class CreatePost{
+        private Long userId;
+        private String title;
+        private String content;
+        private String imageUrl;
+
+    }
 }

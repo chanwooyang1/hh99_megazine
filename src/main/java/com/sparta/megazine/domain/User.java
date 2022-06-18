@@ -27,15 +27,15 @@ public class User extends TimeStamped implements UserDetails {
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Post> posts = new HashSet<>();
+    List<Post> posts = new ArrayList<>();
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Comment> comments = new HashSet<>();
+    List<Comment> comments = new ArrayList<>();
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    Set<Like> likes = new HashSet<>();
+    List<Like> likes = new ArrayList<>();
 
     @Column(nullable = false)
     private String name;
@@ -45,9 +45,6 @@ public class User extends TimeStamped implements UserDetails {
 
     @Column(nullable = false)
     private String nickname;
-
-    @Column
-    private String profile_image_url;
 
     @Column(nullable = false, unique = true)
     private String email;
